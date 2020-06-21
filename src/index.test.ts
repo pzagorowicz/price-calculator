@@ -24,12 +24,15 @@ describe("updateSelectedServices.select", () => {
         expect(result).toEqual(["WeddingSession", "VideoRecording", "BlurayPackage"]);
     });
 
-    test("should select related service when one of main services is selected", () => {
-        const result = updateSelectedServices(["WeddingSession", "Photography"], {
+    test.each([
+        "Photography", 
+        "VideoRecording"
+    ])("should select related service when one of main services is selected", (mainService: ServiceType) => {
+        const result = updateSelectedServices(["WeddingSession", mainService], {
             type: "Select",
             service: "TwoDayEvent"
         });
-        expect(result).toEqual(["WeddingSession", "Photography", "TwoDayEvent"]);
+        expect(result).toEqual(["WeddingSession", mainService, "TwoDayEvent"]);
     });
 });
 
