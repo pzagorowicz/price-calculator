@@ -105,7 +105,7 @@ describe.each([
     [2020, 300],
     [2021, 300],
     [2022, 0]
-])("calcularePrice.photographyWithWeddingSessionPrice (%i increase by %i)", (year: ServiceYear, increase) => {
+])("calculatePrice.photographyWithWeddingSessionPrice (%i increase by %i)", (year: ServiceYear, increase) => {
     test("price matches requirements", () => {
         const withoutSession = calculatePrice(["Photography"], year);
         const withSession = calculatePrice(["Photography", "WeddingSession"], year);
@@ -132,7 +132,7 @@ describe.each([
     [2020, 300],
     [2021, 300],
     [2022, 300]
-])("calcularePrice.videoRecordingWithWeddingSessionPrice (%i increase by %i)", (year: ServiceYear, increase) => {
+])("calculatePrice.videoRecordingWithWeddingSessionPrice (%i increase by %i)", (year: ServiceYear, increase) => {
     test("price matches requirements", () => {
         const withoutSession = calculatePrice(["VideoRecording"], year);
         const withSession = calculatePrice(["VideoRecording", "WeddingSession"], year);
@@ -157,7 +157,7 @@ describe.each([
     [2020, 500],
     [2021, 500],
     [2022, 600]
-])("calcularePrice.videoRecordingWithPhotographyPrice (%i increase by %i)", (year: ServiceYear, increase) => {
+])("calculatePrice.videoRecordingWithPhotographyPrice (%i increase by %i)", (year: ServiceYear, increase) => {
     test("price matches requirements", () => {
         const withoutPhotography = calculatePrice(["VideoRecording"], year);
         const withPhotography = calculatePrice(["VideoRecording", "Photography"], year);
@@ -183,7 +183,7 @@ describe.each([
     [2021, 300],
     [2022, 0]
 ])(
-    "calcularePrice.videoRecordingWithPhotographyWithSessionPrice (%i increase by %i)",
+    "calculatePrice.videoRecordingWithPhotographyWithSessionPrice (%i increase by %i)",
     (year: ServiceYear, increase) => {
         test("price matches requirements", () => {
             const withoutSession = calculatePrice(["VideoRecording", "Photography"], year);
