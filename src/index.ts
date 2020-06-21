@@ -3,6 +3,11 @@ import { removeFromArray } from "./helpers";
 export type ServiceYear = 2020 | 2021 | 2022;
 export type ServiceType = "Photography" | "VideoRecording" | "BlurayPackage" | "TwoDayEvent" | "WeddingSession";
 
+const relatedToMainServicesMap = new Map<ServiceType, ServiceType[]>([
+    ["BlurayPackage", ["VideoRecording"]],
+    ["TwoDayEvent", ["Photography", "VideoRecording"]]
+]);
+
 export const updateSelectedServices = (
     previouslySelectedServices: ServiceType[],
     action: { type: "Select" | "Deselect"; service: ServiceType }
@@ -11,16 +16,19 @@ export const updateSelectedServices = (
     switch (action.type) {
         case "Select":
             {
-                if (previouslySelectedServices.some(value => value === action.service)) {
+                const alreadySelected = previouslySelectedServices.some(value => value === action.service);
+                if (alreadySelected) {
                     break;
                 }
 
-                if (action.service === "BlurayPackage" && !previouslySelectedServices.some(value => value === "VideoRecording")) {
-                    break;
-                }
-
-                if (action.service === "TwoDayEvent" && !previouslySelectedServices.some(value => value === "Photography" || value === "VideoRecording")) {
-                    break;
+                const mainServices = relatedToMainServicesMap.get(action.service);
+                if (mainServices && mainServices.length > 0) {
+                    const atLeastOneMainServiceSelected = 
+                        previouslySelectedServices.some(service => mainServices.some(mainService => mainService === service));
+                        
+                    if (!atLeastOneMainServiceSelected) {
+                        break;
+                    }
                 }
 
                 const services = [...previouslySelectedServices];            
