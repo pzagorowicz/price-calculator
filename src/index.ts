@@ -1,3 +1,5 @@
+import { removeFromArray } from "./helpers";
+
 export type ServiceYear = 2020 | 2021 | 2022;
 export type ServiceType = "Photography" | "VideoRecording" | "BlurayPackage" | "TwoDayEvent" | "WeddingSession";
 
@@ -56,14 +58,3 @@ export const updateSelectedServices = (
 };
 
 export const calculatePrice = (selectedServices: ServiceType[], selectedYear: ServiceYear) => ({ basePrice: 0, finalPrice: 0 });
-
-const removeFromArray = (services: ServiceType[], service: ServiceType) => {
-    const index = services.indexOf(service);
-
-    if (index > -1) {
-        services.splice(index, 1);
-        return true;
-    }
-
-    return false;
-}
