@@ -1,4 +1,4 @@
-import { ServiceType, ServiceYear } from "."
+import { ServiceType, ServiceYear } from "../types"
 
 type ServicePrice = {
     service: ServiceType;
